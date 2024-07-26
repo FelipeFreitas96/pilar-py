@@ -1,6 +1,7 @@
 # Pilar PY
 
-Este repositório contém o código para o teste de Software Engineer Backend. A tarefa envolve a criação de uma API usando Python com duas rotas: uma para contar vogais em palavras e outra para ordenar palavras. O projeto também inclui um pipeline de CI/CD usando GitHub Actions que executa as etapas de lint, testes e deploy.
+Este repositório contém o código para o teste de Software Engineer Backend. A tarefa envolve a criação de uma API usando Python com duas rotas: uma para contar vogais em palavras e outra para ordenar palavras. O projeto também inclui um swagger e uma pipeline de CI/CD usando GitHub Actions que executa as etapas de lint, testes e deploy.
+
 
 # Endpoints da API
 ## [POST] /vowel_count
@@ -103,6 +104,8 @@ python main.py
 ```
 
 A API estará acessível em http://127.0.0.1:5000.
+
+O Swagger é accesível através da rota http://127.0.0.1:5000/api.
 
 ## Testes
 Para rodar os testes, use:
