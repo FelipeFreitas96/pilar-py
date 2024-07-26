@@ -8,4 +8,4 @@ class WordService:
         return {word: self.getVowalsCount(word) for word in words if len(word) > 0}
 
     def sortWordsFromArray(self, words, order):
-        return words.sort(reverse=order == 'asc') or words
+        return words.sort(reverse=order == 'desc') or words
