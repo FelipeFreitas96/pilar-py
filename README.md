@@ -103,9 +103,9 @@ pip install -r requirements.txt
 python main.py
 ```
 
-A API estará acessível em http://127.0.0.1:5000.
+A API estará acessível em http://127.0.0.1:3001.
 
-O Swagger é accesível através da rota http://127.0.0.1:5000/api.
+O Swagger é accesível através da rota http://127.0.0.1:3001/api.
 
 ## Testes
 Para rodar os testes, use:
