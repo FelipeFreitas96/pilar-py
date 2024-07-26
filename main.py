@@ -1,5 +1,5 @@
 from controllers.word_controller import api as wordApi
-from flask import Flask, request, jsonify
+from flask import Flask
 from flask_restx import Api
 
 app = Flask(__name__)
