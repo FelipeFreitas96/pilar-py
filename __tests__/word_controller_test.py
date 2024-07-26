@@ -15,7 +15,7 @@ def client():
 
 def test_sort_words(client):
     ## Testando a ordenação crescente
-    response = client.post('/sort', 
+    response = client.post('/sort',
                            data=json.dumps({"words": ["batman", "robin", "coringa"], "order": "asc"}),
                            content_type='application/json')
     assert response.status_code == 200

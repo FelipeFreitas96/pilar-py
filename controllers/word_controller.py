@@ -1,12 +1,28 @@
+"""
+MIT License
+
+PilarPY - Backend
+Author: Felipe Freitas
+"""
+
 from flask import request
 from flask_restx import Resource, Namespace, fields
 from services.word_service import WordService
 
 word_service = WordService()
-api = Namespace('WordController', description='Controlador de palavras', path='/')
+api = Namespace(
+    'WordController',
+    description='Controlador de palavras',
+    path='/'
+)
+
 vowals_count_model = {
     'Request': api.model('GetVowalsRequest', {
-        'words': fields.List(fields.String, required=True, description='Lista de palavras a serem contadas as vogais')
+        'words': fields.List(
+            fields.String,
+            required=True,
+            description='Lista de palavras a serem contadas as vogais'
+        )
     }),
     'Response': api.model('GetVowalsResponse', {
         'key': fields.Integer,
@@ -15,17 +31,27 @@ vowals_count_model = {
 
 sort_model = {
     'Request': api.model('SortRequest', {
-        'words': fields.List(fields.String, required=True, description='Lista de palavras a serem contadas as vogais'),
-        'order': fields.String(required=True, description='Ordenação da lista')
+        'words': fields.List(fields.String,
+            required=True,
+            description='Lista de palavras a serem contadas as vogais'
+        ),
+        'order': fields.String(
+            required=True,
+            description='Ordenação da lista'
+        )
     }),
     'Response': fields.List(fields.String)
 }
 
 error_model = api.model('ErrorResponse', {
-    'message': fields.String(required=True, description='Mensagem de erro')
+    'message': fields.String(
+        required=True,
+        description='Mensagem de erro'
+    )
 })
 
 @api.route('/sort')
+@api.doc(params={'order': 'asc|desc'})
 class SortResource(Resource):
     @api.expect(sort_model['Request'], validate=True)
     @api.response(200, 'Success', sort_model['Response'])
@@ -39,16 +65,16 @@ class SortResource(Resource):
             return {
                 'message': "Invalid order (try 'asc' or 'desc')"
             }, 400
-        elif len(words) == 0:
+        
+        if len(words) == 0:
             return {
                 'message': "Empty list"
             }, 400
 
-        return word_service.sortWordsFromArray(
+        return word_service.sort_words_from_array(
             words,
-            order
-        )   
-
+            order,
+        )
 @api.route('/vowel_count')
 class VowelCountResource(Resource):
     @api.expect(vowals_count_model['Request'], validate=True)
@@ -63,7 +89,7 @@ class VowelCountResource(Resource):
                 'message': "Empty list"
             }, 400
 
-        return word_service.getVowalsFromArray(words)
+        return word_service.get_vowals_from_array(words)
 
 api.add_resource(SortResource, '/sort')
 api.add_resource(VowelCountResource, '/vowel_count')
